@@ -1,4 +1,5 @@
-from src.helper import get_paired_image_ds, get_density_ds, get_count_image_ds
+from src.data.helper import get_paired_image_ds, get_density_ds, get_count_image_ds
+from tensorflow.data import Dataset, AUTOTUNE
 
 class CountDataIterator(object):
     def __init__(self, dataset, path, size):
@@ -13,8 +14,8 @@ class CountDataIterator(object):
 
 class RankDataIterator(object):
     def __init__(self, dataset, path, size):
-        self.src_f = [path + d["source_image"] for d in dataset]
-        self.tar_f = [path + d["target_image"] for d in dataset]
+        self.src_f = [path + d["img_src"] for d in dataset]
+        self.tar_f = [path + d["img_tar"] for d in dataset]
         self.label = [d["label"] for d in dataset]
         self.size = size
 
